@@ -23,6 +23,8 @@ public class PdfService {
         model.put("adresse", data.getAdresse());
         model.put("typeContrat", data.getTypeContrat());
         model.put("date", data.getDate());
+        model.put("montant", data.getMontant());
+        model.put("duree", data.getDuree());
     
         Template template = freemarkerConfig.getTemplate("contrat.ftl");
     

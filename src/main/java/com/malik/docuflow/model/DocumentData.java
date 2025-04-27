@@ -19,6 +19,8 @@ public class DocumentData {
     private String typeContrat;
     private String date;
     private String email;
+    private String montant;
+    private String duree;
 
     public String getEmail() {
         return email;
@@ -59,5 +61,21 @@ public class DocumentData {
 
     public void setDate(String date) {
         this.date = date;
+    }
+    // Getters & Setters
+    public String getMontant() {
+        return montant;
+    }
+
+    public void setMontant(String montant) {
+        this.montant = montant;
+    }
+
+    public String getDuree() {
+        return duree;
+    }
+
+    public void setDuree(String duree) {
+        this.duree = duree;
     }
 }

@@ -10,5 +10,7 @@
     <p><strong>Adresse :</strong> ${adresse}</p>
     <p><strong>Type de contrat :</strong> ${typeContrat}</p>
     <p><strong>Date :</strong> ${date}</p>
+    <p>Montant du contrat : ${montant} €</p>
+    <p>Durée du contrat : ${duree} ans</p>
 </body>
 </html>
