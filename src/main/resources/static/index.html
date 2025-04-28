@@ -7,14 +7,13 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f0f4f7, #d9e2ec);
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
       margin: 0;
       padding: 20px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
     h1 {
       color: #2a4365;
@@ -28,25 +27,44 @@
       margin-bottom: 30px;
       text-align: center;
     }
-    form {
+    .workflow {
       background: white;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      max-width: 700px;
       width: 100%;
-      max-width: 400px;
+    }
+    .workflow h2 {
+      color: #2b6cb0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .workflow ol {
+      color: #4a5568;
+      font-size: 1em;
+      padding-left: 20px;
+    }
+    form {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
       display: flex;
       flex-direction: column;
     }
     input {
       margin-bottom: 15px;
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1em;
     }
     button {
-      padding: 12px;
+      padding: 14px;
       background: #3182ce;
       color: white;
       border: none;
@@ -64,32 +82,52 @@
       text-align: center;
     }
     footer {
-      margin-top: 40px;
+      margin-top: 50px;
       font-size: 0.9em;
       color: #718096;
+      text-align: center;
+    }
+    footer a {
+      color: #3182ce;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
 
 <h1>Bienvenue sur DocuFlow 🚀</h1>
-<p>Générez facilement votre contrat PDF personnalisé</p>
+<p>Générez facilement votre contrat PDF personnalisé - projet imaginé pour la <strong>Mutuelle des Motards</strong>.</p>
+
+<div class="workflow">
+  <h2>Comment ça marche ?</h2>
+  <ol>
+    <li>🖊️ Remplissez vos informations dans le formulaire.</li>
+    <li>📄 Votre contrat est généré automatiquement en PDF.</li>
+    <li>📩 Vous recevez votre document directement par email en quelques secondes !</li>
+  </ol>
+</div>
 
 <form id="docForm">
-  <input type="text" name="nom" placeholder="Votre nom" required>
-  <input type="text" name="adresse" placeholder="Votre adresse" required>
-  <input type="text" name="typeContrat" placeholder="Type de contrat" required>
-  <input type="date" name="date" placeholder="Date" required>
-  <input type="email" name="email" placeholder="Votre email" required>
-  <input type="text" name="montant" placeholder="Montant (optionnel)">
-  <input type="text" name="duree" placeholder="Durée (optionnel)">
-  <button type="submit">Générer le PDF et recevoir par mail</button>
+  <input type="text" name="nom" placeholder="Votre nom complet" required>
+  <input type="text" name="adresse" placeholder="Votre adresse complète" required>
+  <input type="text" name="typeContrat" placeholder="Ex : Contrat d'assurance moto" required>
+  <input type="date" name="date" placeholder="Date du contrat" required>
+  <input type="email" name="email" placeholder="Votre email pour recevoir le PDF" required>
+  <input type="text" name="montant" placeholder="Montant de l'assurance (ex: 500€)">
+  <input type="text" name="duree" placeholder="Durée du contrat (ex: 12 mois)">
+  <button type="submit">🚀 Générer et recevoir par mail</button>
 </form>
 
 <div id="message" class="message"></div>
 
 <footer>
-  © 2025 DocuFlow • Ne pas répondre aux mails automatiques • <a href="https://github.com/Malik971/DocuflowPDF" target="_blank">GitHub</a>
+  <p>© 2025 DocuFlow • Développé avec passion par Malik Ibo</p>
+  <p>
+    <a href="https://www.linkedin.com/in/malik-ibo-086693261/" target="_blank">LinkedIn</a> •
+    <a href="https://main--portfolio-ibo.netlify.app/" target="_blank">Portfolio</a> •
+    <a href="mailto:malik97un@gmail.com">Contact Email</a> •
+    <a href="https://github.com/Malik971/DocuflowPDF" target="_blank">GitHub</a>
+  </p>
 </footer>
 
 <script>
@@ -113,11 +151,11 @@
       });
 
       if (response.ok) {
-        messageDiv.textContent = "✅ Contrat envoyé avec succès sur votre mail !";
+        messageDiv.textContent = "✅ Contrat envoyé avec succès sur votre email !";
         messageDiv.style.color = "green";
         form.reset();
       } else {
-        messageDiv.textContent = "❌ Erreur lors de l'envoi du contrat.";
+        messageDiv.textContent = "❌ Une erreur s'est produite lors de l'envoi.";
         messageDiv.style.color = "red";
       }
     } catch (error) {
