@@ -25,25 +25,25 @@ public class PdfService {
         model.put("date", data.getDate());
         model.put("montant", data.getMontant());
         model.put("duree", data.getDuree());
-    
+
         Template template = freemarkerConfig.getTemplate("contrat.ftl");
-    
+
         StringWriter stringWriter = new StringWriter();
         template.process(model, stringWriter);
         String htmlContent = stringWriter.toString();
-    
-        // Nom du fichier PDF
+
+        // ✅ Utiliser le dossier temporaire
         String filename = String.format("contrat-%s-%s.pdf",
                 data.getNom().replaceAll("\\s+", "_"),
                 data.getDate());
-    
-    
-    
-        // Écriture vers un fichier local
-        File outputFile = new File("output", filename);
-        OutputStream fileOut = new FileOutputStream(outputFile);
-        System.out.println("✅ PDF enregistré dans le fichier : " + outputFile.getAbsolutePath());
-    
+
+        File outputDir = new File("/tmp"); // Dossier temporaire sur Render
+        if (!outputDir.exists()) {
+            outputDir.mkdirs(); // Créer /tmp si nécessaire (pas obligatoire normalement)
+        }
+
+        File outputFile = new File(outputDir, filename);
+
         // Génération PDF
         ByteArrayOutputStream memoryStream = new ByteArrayOutputStream();
         PdfRendererBuilder builder = new PdfRendererBuilder();
@@ -51,13 +51,16 @@ public class PdfService {
         builder.withHtmlContent(htmlContent, null);
         builder.toStream(memoryStream);
         builder.run();
-    
+
         byte[] pdfBytes = memoryStream.toByteArray();
-    
-        // Écriture sur disque
-        fileOut.write(pdfBytes);
-        fileOut.close();
-    
-        return pdfBytes; // Toujours renvoyer le PDF aussi
+
+        // 🛠 Écriture sur disque (dans /tmp)
+        try (OutputStream fileOut = new FileOutputStream(outputFile)) {
+            fileOut.write(pdfBytes);
+        }
+
+        System.out.println("✅ PDF enregistré dans le fichier : " + outputFile.getAbsolutePath());
+
+        return pdfBytes; // Toujours renvoyer le PDF en mémoire aussi
     }
-}    
+}
