@@ -16,7 +16,7 @@ public class MailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void envoyerContratAvecPdf(String destinataire, File fichierPdf) throws MessagingException {
+    public void envoyerContratAvecPdf(String destinataire, File fichierPdfOriginal) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
@@ -69,11 +69,12 @@ public class MailService {
         </html>
         """;
 
-        helper.setText(contenuHtml, true); // << ici on dit à Spring que c'est du HTML
+        helper.setText(contenuHtml, true);
 
         // 🧷 Pièce jointe PDF
-        FileSystemResource file = new FileSystemResource(fichierPdf);
-        helper.addAttachment(fichierPdf.getName(), file);
+        File fichierTmp = new File("/tmp/" + fichierPdfOriginal.getName());
+        FileSystemResource file = new FileSystemResource(fichierTmp);
+        helper.addAttachment(fichierTmp.getName(), file);
 
         mailSender.send(message);
         System.out.println("📨 Email HTML envoyé à : " + destinataire);
