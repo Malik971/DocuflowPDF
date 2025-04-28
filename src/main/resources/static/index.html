@@ -2,26 +2,131 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bienvenue sur DocuFlow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocuFlow - Générateur de contrats PDF</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-      background: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f7, #d9e2ec);
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     h1 {
-      color: #3498db;
+      color: #2a4365;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-align: center;
     }
     p {
-      font-size: 18px;
+      color: #4a5568;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+    input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    button {
+      padding: 12px;
+      background: #3182ce;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #2b6cb0;
+    }
+    .message {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #718096;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 Bienvenue sur DocuFlow !</h1>
-  <p>Générez facilement vos contrats PDF en ligne.</p>
-  <p>Utilisez notre API REST pour commencer !</p>
+
+<h1>Bienvenue sur DocuFlow 🚀</h1>
+<p>Générez facilement votre contrat PDF personnalisé</p>
+
+<form id="docForm">
+  <input type="text" name="nom" placeholder="Votre nom" required>
+  <input type="text" name="adresse" placeholder="Votre adresse" required>
+  <input type="text" name="typeContrat" placeholder="Type de contrat" required>
+  <input type="date" name="date" placeholder="Date" required>
+  <input type="email" name="email" placeholder="Votre email" required>
+  <input type="text" name="montant" placeholder="Montant (optionnel)">
+  <input type="text" name="duree" placeholder="Durée (optionnel)">
+  <button type="submit">Générer le PDF et recevoir par mail</button>
+</form>
+
+<div id="message" class="message"></div>
+
+<footer>
+  © 2025 DocuFlow • Ne pas répondre aux mails automatiques • <a href="https://github.com/Malik971/DocuflowPDF" target="_blank">GitHub</a>
+</footer>
+
+<script>
+  const form = document.getElementById('docForm');
+  const messageDiv = document.getElementById('message');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => data[key] = value);
+
+    try {
+      const response = await fetch('/api/generate-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        messageDiv.textContent = "✅ Contrat envoyé avec succès sur votre mail !";
+        messageDiv.style.color = "green";
+        form.reset();
+      } else {
+        messageDiv.textContent = "❌ Erreur lors de l'envoi du contrat.";
+        messageDiv.style.color = "red";
+      }
+    } catch (error) {
+      console.error(error);
+      messageDiv.textContent = "❌ Impossible de contacter le serveur.";
+      messageDiv.style.color = "red";
+    }
+  });
+</script>
+
 </body>
 </html>

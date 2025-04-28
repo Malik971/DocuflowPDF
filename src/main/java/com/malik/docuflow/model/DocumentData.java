@@ -62,7 +62,7 @@ public class DocumentData {
     public void setDate(String date) {
         this.date = date;
     }
-    // Getters & Setters
+    
     public String getMontant() {
         return montant;
     }

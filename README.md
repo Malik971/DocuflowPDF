@@ -249,3 +249,44 @@ spring.mail.username=${SPRING_MAIL_USERNAME}
 spring.mail.password=${SPRING_MAIL_PASSWORD}
 spring.mail.properties.mail.smtp.auth=${SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH}
 spring.mail.properties.mail.smtp.starttls.enable=${SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE}
+
+
+# Partie 3 : Déploiement et limites du projet actuel
+## 🚀 Déploiement sur Render
+Après avoir développé l'application localement,
+le projet a été déployé sur Render, une plateforme gratuite de cloud hosting.
+
+### 📋 Étapes du déploiement :
+Création du projet GitHub DocuflowPDF
+
+Création d'un Web Service sur Render
+
+Ajout d'un Dockerfile personnalisé pour Java + Maven
+
+Mise en place des Variables d'environnement pour la configuration sensible (Gmail SMTP)
+
+Premier déploiement réussi avec création d'une image Docker et démarrage automatique du serveur Spring Boot
+
+### 👉 Lien public du service :
+## https://docuflowpdf.onrender.com
+
+
+### 🐞 Problèmes rencontrés pendant le déploiement
+## 1️⃣ Permission denied sur ./mvnw
+### ❌ Render ne reconnaissait pas les fichiers .mvnw sans permission Linux.
+
+Solution :
+### ✅ Donner les droits avec chmod +x mvnw
+
+## 2️⃣ mvn: command not found
+### ❌ Render ne trouvait pas Maven car ce n'est pas installé par défaut.
+
+Solution :
+### ✅ Création d'un vrai Dockerfile pour builder l’application en image complète.
+
+## 3️⃣ application-secrets.properties manquant
+### ❌ L’application échouait car des fichiers de secrets locaux n’étaient pas sur Render.
+
+Solution :
+### ✅ Utiliser les Variables d'environnement Render pour configurer le SMTP Gmail.
+
