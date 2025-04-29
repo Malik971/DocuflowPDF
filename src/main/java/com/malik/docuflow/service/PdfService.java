@@ -21,25 +21,36 @@ public class PdfService {
         Map<String, Object> model = new HashMap<>();
         model.put("nom", data.getNom());
         model.put("adresse", data.getAdresse());
-        model.put("typeContrat", data.getTypeContrat());
+        model.put("email", data.getEmail());
         model.put("date", data.getDate());
+        model.put("typeContrat", data.getTypeContrat());
         model.put("montant", data.getMontant());
         model.put("duree", data.getDuree());
+        model.put("marque", data.getMarque());
+        model.put("modele", data.getModele());
+        model.put("kilometrage", data.getKilometrage());
+        model.put("cylindree", data.getCylindree());
+        model.put("garantiesSupplementaires", data.getGarantiesSupplementaires());
+        model.put("franchise", data.getFranchise());
+        model.put("plafondRemboursement", data.getPlafondRemboursement());
+        model.put("periodicitePaiement", data.getPeriodicitePaiement());
 
+        // Chargement du template
         Template template = freemarkerConfig.getTemplate("contrat.ftl");
 
+        // Rendu HTML
         StringWriter stringWriter = new StringWriter();
         template.process(model, stringWriter);
         String htmlContent = stringWriter.toString();
 
-        // ✅ Utiliser le dossier temporaire
+        // Nom du fichier PDF
         String filename = String.format("contrat-%s-%s.pdf",
                 data.getNom().replaceAll("\\s+", "_"),
                 data.getDate());
 
-        File outputDir = new File("/tmp"); // Dossier temporaire sur Render
+        File outputDir = new File("/tmp");
         if (!outputDir.exists()) {
-            outputDir.mkdirs(); // Créer /tmp si nécessaire (pas obligatoire normalement)
+            outputDir.mkdirs();
         }
 
         File outputFile = new File(outputDir, filename);
@@ -54,13 +65,13 @@ public class PdfService {
 
         byte[] pdfBytes = memoryStream.toByteArray();
 
-        // 🛠 Écriture sur disque (dans /tmp)
+        // Sauvegarde sur le disque
         try (OutputStream fileOut = new FileOutputStream(outputFile)) {
             fileOut.write(pdfBytes);
         }
 
         System.out.println("✅ PDF enregistré dans le fichier : " + outputFile.getAbsolutePath());
 
-        return pdfBytes; // Toujours renvoyer le PDF en mémoire aussi
+        return pdfBytes;
     }
 }

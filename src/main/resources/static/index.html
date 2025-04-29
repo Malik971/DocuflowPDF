@@ -108,13 +108,21 @@
 </div>
 
 <form id="docForm">
-  <input type="text" name="nom" placeholder="Votre nom complet" required>
-  <input type="text" name="adresse" placeholder="Votre adresse complète" required>
-  <input type="text" name="typeContrat" placeholder="Ex : Contrat d'assurance moto" required>
+  <input type="text" name="nom" placeholder="Nom complet" required>
+  <input type="text" name="adresse" placeholder="Adresse complète" required>
+  <input type="email" name="email" placeholder="Email" required>
   <input type="date" name="date" placeholder="Date du contrat" required>
-  <input type="email" name="email" placeholder="Votre email pour recevoir le PDF" required>
-  <input type="text" name="montant" placeholder="Montant de l'assurance (ex: 500€)">
-  <input type="text" name="duree" placeholder="Durée du contrat (ex: 12 mois)">
+  <input type="text" name="typeContrat" placeholder="Type de contrat" required>
+  <input type="text" name="montant" placeholder="Montant de l'assurance">
+  <input type="text" name="duree" placeholder="Durée du contrat (ex: 1 an)">
+  <input type="text" name="marque" placeholder="Marque du véhicule">
+  <input type="text" name="modele" placeholder="Modèle du véhicule">
+  <input type="text" name="kilometrage" placeholder="Kilométrage (ex: 12000 km)">
+  <input type="text" name="cylindree" placeholder="Cylindrée (ex: 125cc)">
+  <input type="text" name="garantiesSupplementaires" placeholder="Garanties supplémentaires souhaitées">
+  <input type="text" name="franchise" placeholder="Franchise (ex: 250€)">
+  <input type="text" name="plafondRemboursement" placeholder="Plafond de remboursement (ex: 10 000€)">
+  <input type="text" name="periodicitePaiement" placeholder="Périodicité de paiement (ex: Mensuelle)">
   <button type="submit">🚀 Générer et recevoir par mail</button>
 </form>
 

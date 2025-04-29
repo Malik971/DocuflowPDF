@@ -5,32 +5,36 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-// c’est une classe qu’on veut enregistrer en base de données
 @Entity
 public class DocumentData {
 
-    // pour marquer la clé primaire
     @Id
-    // pour dire que c’est une clé primaire auto-générée
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nom;
     private String adresse;
-    private String typeContrat;
-    private String date;
     private String email;
+    private String date;
+    private String typeContrat;
     private String montant;
     private String duree;
 
-    public String getEmail() {
-        return email;
+    private String marque;
+    private String modele;
+    private String kilometrage;
+    private String cylindree;
+    private String garantiesSupplementaires;
+    private String franchise;
+    private String plafondRemboursement;
+    private String periodicitePaiement;
+
+    // Getters et Setters
+
+    public Long getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    // Getters & Setters
     public String getNom() {
         return nom;
     }
@@ -47,12 +51,12 @@ public class DocumentData {
         this.adresse = adresse;
     }
 
-    public String getTypeContrat() {
-        return typeContrat;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTypeContrat(String typeContrat) {
-        this.typeContrat = typeContrat;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDate() {
@@ -62,7 +66,15 @@ public class DocumentData {
     public void setDate(String date) {
         this.date = date;
     }
-    
+
+    public String getTypeContrat() {
+        return typeContrat;
+    }
+
+    public void setTypeContrat(String typeContrat) {
+        this.typeContrat = typeContrat;
+    }
+
     public String getMontant() {
         return montant;
     }
@@ -77,5 +89,69 @@ public class DocumentData {
 
     public void setDuree(String duree) {
         this.duree = duree;
+    }
+
+    public String getMarque() {
+        return marque;
+    }
+
+    public void setMarque(String marque) {
+        this.marque = marque;
+    }
+
+    public String getModele() {
+        return modele;
+    }
+
+    public void setModele(String modele) {
+        this.modele = modele;
+    }
+
+    public String getKilometrage() {
+        return kilometrage;
+    }
+
+    public void setKilometrage(String kilometrage) {
+        this.kilometrage = kilometrage;
+    }
+
+    public String getCylindree() {
+        return cylindree;
+    }
+
+    public void setCylindree(String cylindree) {
+        this.cylindree = cylindree;
+    }
+
+    public String getGarantiesSupplementaires() {
+        return garantiesSupplementaires;
+    }
+
+    public void setGarantiesSupplementaires(String garantiesSupplementaires) {
+        this.garantiesSupplementaires = garantiesSupplementaires;
+    }
+
+    public String getFranchise() {
+        return franchise;
+    }
+
+    public void setFranchise(String franchise) {
+        this.franchise = franchise;
+    }
+
+    public String getPlafondRemboursement() {
+        return plafondRemboursement;
+    }
+
+    public void setPlafondRemboursement(String plafondRemboursement) {
+        this.plafondRemboursement = plafondRemboursement;
+    }
+
+    public String getPeriodicitePaiement() {
+        return periodicitePaiement;
+    }
+
+    public void setPeriodicitePaiement(String periodicitePaiement) {
+        this.periodicitePaiement = periodicitePaiement;
     }
 }
