@@ -55,8 +55,7 @@
     <div class="section">
         <h2>Garanties supplémentaires</h2>
         <p>
-        En signant ce contrat, l’assuré certifie que toutes les informations fournies sont exactes. Toute fausse déclaration, même par omission, peut entraîner la nullité du contrat.
-        L’assuré reconnaît avoir pris connaissance des conditions générales d’assurance et accepte les garanties, exclusions, franchises et montants mentionnés ci-dessus.
+        L’assuré déclare l’exactitude des informations fournies et reconnaît avoir pris connaissance des conditions générales, garanties, exclusions, franchises et montants. Toute fausse déclaration peut annuler le contrat.
         </p>
         <div class="info">${garantiesSupplementaires}</div>
     </div>

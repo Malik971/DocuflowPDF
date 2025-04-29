@@ -33,7 +33,7 @@ public class DocumentController {
             File outputFile = new File("output", filename);
 
             // ✅ Appel de MailService
-            mailService.envoyerContratAvecPdf(data.getEmail(), outputFile);
+            mailService.envoyerContratAvecPdf(data, outputFile);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
