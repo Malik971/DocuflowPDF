@@ -13,7 +13,7 @@
             color: #2b6cb0;
         }
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .info {
             margin-bottom: 10px;
@@ -66,7 +66,7 @@
     </div>
 
     <footer>
-        <p style="font-size: 0.9em; color: gray; margin-top: 40px;">Ce contrat est généré automatiquement par DocuFlow et ne constitue pas un document contractuel officiel sans validation de la Mutuelle des Motards.</p>
+        <p style="font-size: 0.9em; color: gray; margin-top: 30px;">Ce contrat est généré automatiquement par DocuFlow et ne constitue pas un document contractuel officiel sans validation de la Mutuelle des Motards.</p>
     </footer>
 </body>
 </html>
