@@ -35,8 +35,15 @@ public class PdfService {
         model.put("plafondRemboursement", data.getPlafondRemboursement());
         model.put("periodicitePaiement", data.getPeriodicitePaiement());
 
+        String nomTemplate = switch (data.getModeleContrat()) {
+            case "modele2" -> "contrat_premium.ftl";
+            case "modele3" -> "contrat_jeune.ftl";
+            case "modele4" -> "contrat_franchise.ftl";
+            default -> "contrat.ftl"; // modèle 1
+        };
+
         // Chargement du template
-        Template template = freemarkerConfig.getTemplate("contrat.ftl");
+        Template template = freemarkerConfig.getTemplate(nomTemplate);
 
         // Rendu HTML
         StringWriter stringWriter = new StringWriter();

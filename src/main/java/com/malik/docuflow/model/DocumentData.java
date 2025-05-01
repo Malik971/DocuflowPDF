@@ -28,6 +28,7 @@ public class DocumentData {
     private String franchise;
     private String plafondRemboursement;
     private String periodicitePaiement;
+    private String modeleContrat;
 
     // Getters et Setters
 
@@ -153,5 +154,13 @@ public class DocumentData {
 
     public void setPeriodicitePaiement(String periodicitePaiement) {
         this.periodicitePaiement = periodicitePaiement;
+    }
+
+    public String getModeleContrat() {
+        return modeleContrat;
+    }
+    
+    public void setModeleContrat(String modeleContrat) {
+        this.modeleContrat = modeleContrat;
     }
 }
