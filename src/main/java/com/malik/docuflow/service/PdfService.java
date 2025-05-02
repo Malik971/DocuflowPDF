@@ -35,7 +35,12 @@ public class PdfService {
         model.put("plafondRemboursement", data.getPlafondRemboursement());
         model.put("periodicitePaiement", data.getPeriodicitePaiement());
 
-        String nomTemplate = switch (data.getModeleContrat()) {
+        String modeleContrat = data.getModeleContrat();
+            if (modeleContrat == null) {
+            modeleContrat = "modele1"; // celui par "default"
+        }
+
+        String nomTemplate = switch (modeleContrat) {
             case "modele2" -> "contrat_premium.ftl";
             case "modele3" -> "contrat_jeune.ftl";
             case "modele4" -> "contrat_franchise.ftl";
