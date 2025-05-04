@@ -57,24 +57,37 @@ public class PdfService {
 
         // Nom du fichier PDF
         String filename = String.format("contrat-%s-%s.pdf",
+                // Remplace les espaces par des underscores et enlève les caractères spéciaux
+                // regex expliquation : \\s+ signifie un ou plusieurs espaces, et \\W+ signifie un ou plusieurs caractères non alphanumériques
                 data.getNom().replaceAll("\\s+", "_"),
                 data.getDate());
 
         File outputDir = new File("/tmp");
+        // Crée le répertoire de sortie s'il n'existe pas
         if (!outputDir.exists()) {
             outputDir.mkdirs();
         }
 
-        File outputFile = new File(outputDir, filename);
+        File outputFile = new File(outputDir, filename); 
 
         // Génération PDF
+        // Utilisation de ByteArrayOutputStream pour éviter de créer un fichier temporaire
+        // ByteArrayOutputStream viens de la bibliothèque java.io
         ByteArrayOutputStream memoryStream = new ByteArrayOutputStream();
+        // Utilisation de PdfRendererBuilder pour générer le PDF
+        // et l'écrire dans le ByteArrayOutputStream
         PdfRendererBuilder builder = new PdfRendererBuilder();
+        // Utilisation de la méthode useFastMode pour améliorer les performances
         builder.useFastMode();
+        // Utilisation de la méthode withHtmlContent pour ajouter le contenu HTML
         builder.withHtmlContent(htmlContent, null);
+        // Utilisation de la méthode toStream pour écrire le PDF dans le ByteArrayOutputStream
         builder.toStream(memoryStream);
+        // Utilisation de la méthode run pour générer le PDF
         builder.run();
 
+        // Conversion du ByteArrayOutputStream en tableau de bytes
+        // pour pouvoir l'envoyer dans la réponse HTTP
         byte[] pdfBytes = memoryStream.toByteArray();
 
         // Sauvegarde sur le disque
