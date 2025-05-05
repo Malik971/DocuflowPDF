@@ -1,24 +1,34 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import ProgressOverlay from './components/ProgressOverlay';
+import ProgressOverlay from './ProgressOverlay';
 
 const FormulaireContrat = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [feedbackMessage, setFeedbackMessage] = useState(null);
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
-    setFeedbackMessage(null);
+    setMessage('');
+
+    const formData = new FormData(e.target);
+    const data = {};
+    formData.forEach((v, k) => data[k] = v);
 
     try {
-      const response = await axios.post('https://docuflow.onrender.com/api/documents', {
-        // insère ici les données de ton formulaire
+      const response = await fetch('https://docuflowpdf.onrender.com/api/generate-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
       });
 
-      setFeedbackMessage('✅ Document envoyé avec succès !');
-    } catch (error) {
-      setFeedbackMessage('❌ Une erreur est survenue.');
+      if (response.ok) {
+        setMessage("✅ Contrat envoyé par email !");
+        e.target.reset();
+      } else {
+        setMessage("❌ Une erreur est survenue.");
+      }
+    } catch (err) {
+      setMessage("❌ Impossible de contacter le serveur.");
     } finally {
       setIsLoading(false);
     }
@@ -26,14 +36,14 @@ const FormulaireContrat = () => {
 
   return (
     <>
-      {isLoading && <ProgressOverlay />}
-      
+      <ProgressOverlay isVisible={isLoading} />
       <form onSubmit={handleSubmit}>
-        {/* champs de formulaire ici */}
-        <button type="submit">Envoyer</button>
+        <input name="nom" placeholder="Nom" required />
+        <input name="email" placeholder="Email" required />
+        <input name="typeContrat" placeholder="Type de contrat" />
+        <button type="submit">Générer PDF</button>
       </form>
-
-      {feedbackMessage && <p>{feedbackMessage}</p>}
+      {message && <p>{message}</p>}
     </>
   );
 };
