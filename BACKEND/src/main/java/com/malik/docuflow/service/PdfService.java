@@ -15,6 +15,8 @@ import java.util.Map;
 public class PdfService {
 
     @Autowired
+    // frreemarkerConfig est une instance de la classe Configuration de la bibliothèque FreeMarker
+    // il y a d'autres templates que j'aurais pu charger quel que: Report, Jasper, etc.
     private Configuration freemarkerConfig;
 
     public byte[] generatePdf(DocumentData data) throws Exception {
