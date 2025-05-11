@@ -1,7 +1,8 @@
 import React from 'react';
 import { LinearProgress, Box, Typography } from '@mui/material';
 
-const ProgressOverlay = ({ loadingMessage }) => {
+const ProgressOverlay = ({ isVisible }) => {
+  if (!isVisible) return null;
   return (
     <Box
       sx={{
