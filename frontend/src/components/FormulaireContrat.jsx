@@ -37,7 +37,7 @@ const FormulaireContrat = () => {
   return (
     <>
       <ProgressOverlay isVisible={isLoading} />
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md mx-auto flex flex-col space-y-4 border border-gray-200"
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4"
       >
         <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
  type="text" name="nom" placeholder="Nom complet" required />
