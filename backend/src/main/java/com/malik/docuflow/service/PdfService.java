@@ -43,26 +43,22 @@ public class PdfService {
         }
 
         String nomTemplate = switch (modeleContrat) {
-            case "modele2" -> "contrat_premium.ftl";
-            case "modele3" -> "contrat_jeune.ftl";
-            case "modele4" -> "contrat_franchise.ftl";
+            case "modele2" -> "caf.ftl";
+            case "modele3" -> "sejour.ftl";
+            case "modele4" -> "alternance.ftl";
+            case "modele5" -> "urssaf.ftl";
             default -> "contrat.ftl"; // modèle 1
         };
 
-        // Chargement du template
+        // 3. Chargement du template et rendu HTML
         Template template = freemarkerConfig.getTemplate(nomTemplate);
-
-        // Rendu HTML
         StringWriter stringWriter = new StringWriter();
         template.process(model, stringWriter);
         String htmlContent = stringWriter.toString();
 
-        // Nom du fichier PDF
-        String filename = String.format("contrat-%s-%s.pdf",
-                // Remplace les espaces par des underscores et enlève les caractères spéciaux
-                // regex expliquation : \\s+ signifie un ou plusieurs espaces, et \\W+ signifie un ou plusieurs caractères non alphanumériques
-                data.getNom().replaceAll("\\s+", "_"),
-                data.getDate());
+        // 4. Génération du nom du fichier PDF (en local /tmp)
+        String sanitizedNom = data.getNom().replaceAll("\\s+", "_").replaceAll("\\W+", "");
+        String filename = String.format("contrat-%s-%s.pdf", sanitizedNom, data.getDate());
 
         File outputDir = new File("/tmp");
         // Crée le répertoire de sortie s'il n'existe pas
