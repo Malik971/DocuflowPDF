@@ -20,7 +20,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll()
             )
-            .httpBasic(); // optionnel, désactive l'authentification par formulaire
+            .httpBasic(httpBasic -> httpBasic.disable()); // optionnel, désactive l'authentification par formulaire
 
         return http.build();
     }
