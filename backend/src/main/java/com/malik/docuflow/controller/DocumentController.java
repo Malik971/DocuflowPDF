@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*") // * pour autoriser toutes les origines durant le développement
+// CrossOrigin : Permet de gérer les requêtes CORS (Cross-Origin Resource Sharing)
 // @RestController : Indique que cette classe est un contrôleur REST
 @RestController
 // @RequestMapping : Définit le chemin de base pour toutes les requêtes de ce contrôleur
@@ -60,5 +62,7 @@ public class DocumentController {
     @GetMapping("/test")
     public String test() {
         return "Hello Malik ✅";
+        // pour tester si le serveur fonctionne
+        // requête GET à l'URL https://docuflowpdf.onrender.com/api/test
     }
 }

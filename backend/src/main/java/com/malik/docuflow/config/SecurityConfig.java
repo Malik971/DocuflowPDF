@@ -35,6 +35,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(Arrays.asList(
+            "http://localhost:5173", // port de Vite
             "http://localhost:3000",
             "https://docuflow.onrender.com"
         )); 
