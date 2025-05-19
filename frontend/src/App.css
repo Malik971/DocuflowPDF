@@ -1,0 +1,35 @@
+body.light {
+  background-color: #f0f4ff;
+  color: #000;
+  transition: background-color 0.3s ease;
+}
+
+body.dark {
+  background-color: #1a1a2e;
+  color: #f4f4f4;
+  transition: background-color 0.3s ease;
+}
+
+.app-container {
+  min-height: 100vh;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 20px;
+}
+
+.main-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.main-description {
+  font-size: 1.2rem;
+  max-width: 700px;
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 30px;
+}

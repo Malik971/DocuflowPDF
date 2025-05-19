@@ -43,7 +43,7 @@ input[type="email"],
 input[type="date"],
 input[type="adresse"],
 select {
-  width: 98%;
+  width: 95%;
   padding: 1rem;
   border: 2px solid #ddd;
   border-radius: 12px;
@@ -56,7 +56,7 @@ input:focus,
 select:focus {
   outline: none;
   border-color: #4f46e5;
-  box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 0 7px rgba(99, 102, 241, 0.2);
   background: #f0f8ff;
 }
 
@@ -115,4 +115,10 @@ input, select {
 
 .form-group:hover label {
   color: #6366f1;
+}
+
+/* ça marche pas le changement de color*/
+.formulaire h2,
+.formulaire h3 {
+  color: var(--text-color);
 }

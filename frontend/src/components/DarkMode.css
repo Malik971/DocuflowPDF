@@ -1,0 +1,38 @@
+/* DarkMode.css */
+
+.dark-mode-toggle {
+  background-color: #222;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.dark-mode-toggle:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
+
+/* Thèmes appliqués à toute la page */
+:root[data-theme='light'] {
+  --bg-color: #f5f7fa;
+  --text-color: #1c1c1c;
+  --primary-color: #0055ff;
+}
+
+:root[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --primary-color: #88aaff;
+}
+
+/* Exemple d’utilisation des variables globales */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
