@@ -1,34 +1,69 @@
-import React, { useState } from 'react';
-import ProgressOverlay from './ProgressOverlay';
+import React, { useState } from "react";
+import ProgressOverlay from "./ProgressOverlay";
+import "./Formulaire.css";
 
-const FormulaireContrat = () => {
+export default function FormulaireContrat() {
+  const [form, setForm] = useState({
+    nom: "",
+    adresse: "",
+    email: "",
+    date: "",
+    typeContrat: "",
+    montant: "",
+    duree: "",
+    marque: "",
+    modele: "",
+    kilometrage: "",
+    cylindree: "",
+    garantiesSupplementaires: "",
+    franchise: "",
+    plafondRemboursement: "",
+    periodicitePaiement: "",
+    modeleContrat: "",
+  });
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setMessage('');
-
-    const formData = new FormData(e.target);
-    const data = {};
-    formData.forEach((v, k) => data[k] = v);
-
     try {
-      const response = await fetch('https://docuflowpdf.onrender.com/api/generate-pdf', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+      const response = await fetch("http://localhost:8080/api/documents/genererContrat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
       });
 
       if (response.ok) {
-        setMessage("✅ Contrat envoyé par email !");
-        e.target.reset();
+        setMessage("✅ Contrat généré et envoyé avec succès !");
+        setForm({
+          nom: "",
+          adresse: "",
+          email: "",
+          date: "",
+          typeContrat: "",
+          montant: "",
+          duree: "",
+          marque: "",
+          modele: "",
+          kilometrage: "",
+          cylindree: "",
+          garantiesSupplementaires: "",
+          franchise: "",
+          plafondRemboursement: "",
+          periodicitePaiement: "",
+          modeleContrat: "",
+        });
       } else {
-        setMessage("❌ Une erreur est survenue.");
+        setMessage("❌ Une erreur est survenue lors de l'envoi.");
       }
-    } catch (err) {
-      setMessage("❌ Impossible de contacter le serveur.");
+    } catch (error) {
+      console.error("Erreur lors de l'envoi :", error);
+      setMessage("❌ Erreur réseau ou serveur inaccessible.");
     } finally {
       setIsLoading(false);
     }
@@ -37,51 +72,98 @@ const FormulaireContrat = () => {
   return (
     <>
       <ProgressOverlay isVisible={isLoading} />
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4"
-      >
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="nom" placeholder="Nom complet" required />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="adresse" placeholder="Adresse complète" required />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="email" name="email" placeholder="Email" required />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="date" name="date" placeholder="Date du contrat" required />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="typeContrat" placeholder="Type de contrat" required />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="montant" placeholder="Montant de l'assurance" />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="duree" placeholder="Durée du contrat (ex: 1 an)" />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="marque" placeholder="Marque du véhicule" />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="modele" placeholder="Modèle du véhicule" />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="kilometrage" placeholder="Kilométrage (ex: 12000 km)" />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="cylindree" placeholder="Cylindrée (ex: 125cc)" />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="garantiesSupplementaires" placeholder="Garanties supplémentaires souhaitées" />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="franchise" placeholder="Franchise (ex: 250€)" />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="plafondRemboursement" placeholder="Plafond de remboursement (ex: 10 000€)" />
-        <input className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- type="text" name="periodicitePaiement" placeholder="Périodicité de paiement (ex: Mensuelle)" />
-        <select className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
- name="modeleContrat" required>
-          <option value="">Choisissez un modèle de contrat</option>
-          <option value="modele1">🛵 Moto basique</option>
-          <option value="modele2">🏍️ Moto premium</option>
-          <option value="modele3">🧒 Scoot’ jeune</option>
-          <option value="modele4">🔒 Franchise renforcée</option>
-        </select>
-        <button type="submit">🚀 Générer et recevoir par mail</button>
-        {message && <p className="text-center font-bold">{message}</p>}
+      <form className="formulaire" onSubmit={handleSubmit}>
+        <h2>📝 Remplissez votre contrat d'assurance</h2>
+
+        <div className="form-group">
+          <center><h3>Modèle de contrat</h3>
+          <select name="modeleContrat" value={form.modeleContrat} onChange={handleChange}>
+            <option value="">Choisissez un modèle</option>
+            <option value="modele1">🛵 Moto basique</option>
+            <option value="modele2">🏍️ Moto premium</option>
+            <option value="modele3">🧒 Scoot’ jeune</option>
+            <option value="modele4">🔒 Franchise renforcée</option>
+          </select></center>
+        </div>
+
+        <div className="form-group">
+          <label>Nom *</label>
+          <input type="text" name="nom" placeholder="Nom *" value={form.nom} onChange={handleChange} required />
+        </div>
+
+        <div className="form-group">
+          <label>Adresse</label>
+          <input type="text" name="adresse" placeholder="Pas obligé c'est une démo" value={form.adresse} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Email *</label>
+          <input type="email" name="email" placeholder="Jean@gmail.com" value={form.email} onChange={handleChange} required />
+        </div>
+
+        <div className="form-group">
+          <label>Date *</label>
+          <input type="date" name="date" value={form.date} onChange={handleChange} required />
+        </div>
+
+        <div className="form-group">
+          <label>Type de contrat *</label>
+          <input type="text" name="typeContrat" value={form.typeContrat} onChange={handleChange} required/>
+        </div>
+
+        <div className="form-group">
+          <label>Montant de l'assurance</label>
+          <input type="text" name="montant" value={form.montant} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Durée du contrat</label>
+          <input type="text" name="duree" value={form.duree} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Marque du véhicule</label>
+          <input type="text" name="marque" value={form.marque} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Modèle du véhicule</label>
+          <input type="text" name="modele" value={form.modele} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Kilométrage</label>
+          <input type="text" name="kilometrage" value={form.kilometrage} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Cylindrée</label>
+          <input type="text" name="cylindree" value={form.cylindree} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Garanties supplémentaires</label>
+          <input type="text" name="garantiesSupplementaires" value={form.garantiesSupplementaires} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Franchise</label>
+          <input type="text" name="franchise" value={form.franchise} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Plafond de remboursement</label>
+          <input type="text" name="plafondRemboursement" value={form.plafondRemboursement} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Périodicité de paiement</label>
+          <input type="text" name="periodicitePaiement" value={form.periodicitePaiement} onChange={handleChange} />
+        </div>
+
+        <button type="submit" className="submit-button">🚀 Générer et recevoir par mail</button>
+        {message && <p className="message">{message}</p>}
       </form>
     </>
   );
-};
-
-export default FormulaireContrat;
+}

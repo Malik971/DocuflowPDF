@@ -1,0 +1,118 @@
+/* Style général du formulaire */
+form {
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 10px 15px 25px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-out;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* Animations d'entrée */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Groupes de champs */
+.form-group {
+  margin-bottom: 1rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Libellés */
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #444;
+  transition: color 0.2s ease;
+}
+
+/* Inputs et selects */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="adresse"],
+select {
+  width: 98%;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: #fff;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.2);
+  background: #f0f8ff;
+}
+
+/* Effets de survol */
+input:hover,
+select:hover {
+  border-color: #6366f1;
+  background: #f9f9ff;
+}
+
+/* Champs avec effet de zoom au focus */
+input:focus {
+  transform: scale(1.02);
+}
+
+/* Bouton submit */
+button[type="submit"] {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  margin-top: 2rem;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Hover sur bouton */
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
+}
+
+/* Animation du bouton au clic */
+button[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+/* Message de retour */
+p.text-center {
+  margin-top: 1rem;
+  color: #10b981;
+  font-size: 1.1rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Petits effets globaux */
+input, select {
+  transition: all 0.3s ease-in-out;
+}
+
+.form-group:hover label {
+  color: #6366f1;
+}
