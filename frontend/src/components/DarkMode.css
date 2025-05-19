@@ -18,13 +18,13 @@
 }
 
 /* Thèmes appliqués à toute la page */
-:root[data-theme='light'] {
+:root[data-theme="light"] {
   --bg-color: #f5f7fa;
   --text-color: #1c1c1c;
   --primary-color: #0055ff;
 }
 
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   --bg-color: #121212;
   --text-color: #f1f1f1;
   --primary-color: #88aaff;

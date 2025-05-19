@@ -73,8 +73,12 @@ input:focus {
 }
 
 /* Bouton submit */
+/* button toujours visible même quand je scrolle */
 button[type="submit"] {
   background: linear-gradient(135deg, #4f46e5, #6366f1);
+  position: fixed;
+  bottom: 20px;
+  max-width: 700px;
   color: white;
   padding: 1rem 2rem;
   font-size: 1.1rem;
@@ -109,7 +113,8 @@ p.text-center {
 }
 
 /* Petits effets globaux */
-input, select {
+input,
+select {
   transition: all 0.3s ease-in-out;
 }
 
