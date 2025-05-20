@@ -37,7 +37,9 @@ public class SecurityConfig {
         config.setAllowedOrigins(Arrays.asList(
             "http://localhost:5173", // port de Vite
             "http://localhost:3000",
-            "https://docuflow.onrender.com"
+            "https://docuflow.onrender.com",
+            "https://docuflowpdf.onrender.com/",
+            "https://documentpdf.netlify.app/"
         )); 
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE")); // ajoute les méthodes HTTP que l'on veux autoriser
         config.setAllowedHeaders(Arrays.asList("*")); // * pour autoriser tous les headers. Un header c'est une information envoyée par le client au serveur (ex: Authorization, Content-Type, etc.)
