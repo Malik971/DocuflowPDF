@@ -2,7 +2,7 @@
 import React from "react";
 import FormulaireContrat from "./components/FormulaireContrat";
 import "./App.css";
-import DarkModeToggle from "./components/Darkmode";
+import DarkModeToggle from "./components/DarkMode";
 
 function App() {
   return (
