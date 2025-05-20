@@ -39,7 +39,7 @@ export default function FormulaireContrat() {
 
     try {
       const response = await fetch(
-        "https://docuflowpdf.onrender.com",
+        "https://docuflowpdf.onrender.com/api/generate-pdf",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
