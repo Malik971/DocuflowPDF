@@ -3,25 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Contrat d'assurance moto</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            color: #333;
-        }
-        h1, h2, h3 {
-            color: #2b6cb0;
-        }
-        .section {
-            margin-bottom: 25px;
-        }
-        .info {
-            margin-bottom: 10px;
-        }
-        .signature {
-            margin-top: 60px;
-        }
-    </style>
+    <link href="./contrat.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <h1>Contrat d'assurance moto</h1>
