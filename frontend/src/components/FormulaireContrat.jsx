@@ -96,10 +96,10 @@ export default function FormulaireContrat() {
               onChange={handleChange}
             >
               <option value="">Choisissez un modèle</option>
-              <option value="modele1">🛵 Moto basique</option>
-              <option value="modele2">🏍️ Moto premium</option>
-              <option value="modele3">🧒 Scoot’ jeune</option>
-              <option value="modele4">🔒 Franchise renforcée</option>
+              <option value="alternance">🛵 alternance</option>
+              <option value="caf">🏍️ caf</option>
+              <option value="sejour">🧒 sejour</option>
+              <option value="urssaf">🔒 urssaf</option>
             </select>
           </center>
         </div>

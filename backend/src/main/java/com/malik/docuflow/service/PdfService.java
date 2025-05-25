@@ -19,7 +19,11 @@ public class PdfService {
     // il y a d'autres templates que j'aurais pu charger quel que: Report, Jasper, etc.
     private Configuration freemarkerConfig;
 
+    // byte[] est un tableau de bytes qui va contenir le contenu du PDF généré
+    // byte[] un tableau de bytes c'est un type de données qui permet de stocker des données binaires
+    // byte[] viens de la bibliothèque java.io
     public byte[] generatePdf(DocumentData data) throws Exception {
+        // 1. Préparation des données pour le modèle
         Map<String, Object> model = new HashMap<>();
         model.put("nom", data.getNom());
         model.put("adresse", data.getAdresse());
@@ -37,26 +41,28 @@ public class PdfService {
         model.put("plafondRemboursement", data.getPlafondRemboursement());
         model.put("periodicitePaiement", data.getPeriodicitePaiement());
 
+        // 2. Sélection dynamique du modèle FreeMarker
         String modeleContrat = data.getModeleContrat();
-            if (modeleContrat == null) {
-            modeleContrat = "modele1"; // celui par "default"
+            if (modeleContrat == null || modeleContrat.isBlank()) {
+            modeleContrat = "contrat"; // celui par "default"
         }
 
+        // 3. Mapping entre le choix utilisateur et le fichier .ftl
         String nomTemplate = switch (modeleContrat) {
-            case "modele2" -> "caf.ftl";
-            case "modele3" -> "sejour.ftl";
-            case "modele4" -> "alternance.ftl";
-            case "modele5" -> "urssaf.ftl";
-            default -> "contrat.ftl"; // modèle 1
+            case "alternance" -> "alternance.ftl";
+            case "caf" -> "caf.ftl";
+            case "sejour" -> "sejour.ftl";
+            case "urssaf" -> "urssaf.ftl";
+            default -> "contrat.ftl"; // fallback si aucune correspondance
         };
 
-        // 3. Chargement du template et rendu HTML
+        // 4. Chargement du template et rendu HTML
         Template template = freemarkerConfig.getTemplate(nomTemplate);
         StringWriter stringWriter = new StringWriter();
         template.process(model, stringWriter);
         String htmlContent = stringWriter.toString();
 
-        // 4. Génération du nom du fichier PDF (en local /tmp)
+        // 5. Génération du nom de fichier PDF (temporaire, local)
         String sanitizedNom = data.getNom().replaceAll("\\s+", "_").replaceAll("\\W+", "");
         String filename = String.format("contrat-%s-%s.pdf", sanitizedNom, data.getDate());
 
@@ -88,12 +94,13 @@ public class PdfService {
         // pour pouvoir l'envoyer dans la réponse HTTP
         byte[] pdfBytes = memoryStream.toByteArray();
 
-        // Sauvegarde sur le disque
+        // 7. Sauvegarde sur le disque (utile pour logs ou tests locaux)
         try (OutputStream fileOut = new FileOutputStream(outputFile)) {
             fileOut.write(pdfBytes);
         }
 
         System.out.println("✅ PDF enregistré dans le fichier : " + outputFile.getAbsolutePath());
+        System.out.println("modèle choisi : " + modeleContrat);
 
         return pdfBytes;
     }
