@@ -36,17 +36,20 @@ public class PdfService {
         model.put("franchise", data.getFranchise());
         model.put("plafondRemboursement", data.getPlafondRemboursement());
         model.put("periodicitePaiement", data.getPeriodicitePaiement());
+        model.put("revenu", data.getRevenu());
+        model.put("loyer", data.getLoyer());
+        model.put("situation", data.getSituation());
 
         String modeleContrat = data.getModeleContrat();
             if (modeleContrat == null) {
-            modeleContrat = "modele1"; // celui par "default"
+            modeleContrat = "contrat"; // celui par "default"
         }
 
         String nomTemplate = switch (modeleContrat) {
-            case "modele2" -> "caf.ftl";
-            case "modele3" -> "sejour.ftl";
-            case "modele4" -> "alternance.ftl";
-            case "modele5" -> "urssaf.ftl";
+            case "caf" -> "caf.ftl";
+            case "sejour" -> "sejour.ftl";
+            case "alternance" -> "alternance.ftl";
+            case "urssaf" -> "urssaf.ftl";
             default -> "contrat.ftl"; // modèle 1
         };
 

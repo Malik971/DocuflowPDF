@@ -29,6 +29,9 @@ public class DocumentData {
     private String plafondRemboursement;
     private String periodicitePaiement;
     private String modeleContrat;
+    private String revenu;
+    private String loyer;
+    private String situation;
 
     // Getters et Setters
 
@@ -162,5 +165,23 @@ public class DocumentData {
     
     public void setModeleContrat(String modeleContrat) {
         this.modeleContrat = modeleContrat;
+    }
+    public String getRevenu() {
+        return revenu;
+    }
+    public void setRevenu(String revenu) {
+        this.revenu = revenu;
+    }
+    public String getLoyer() {
+        return loyer;
+    }
+    public void setLoyer(String loyer) {
+        this.loyer = loyer;
+    }
+    public String getSituation() {
+        return situation;
+    }   
+    public void setSituation(String situation) {
+        this.situation = situation;
     }
 }
