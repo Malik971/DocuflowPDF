@@ -120,5 +120,8 @@ input, select {
 /* ça marche pas le changement de color*/
 .formulaire h2,
 .formulaire h3 {
-  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #34343b;
 }
+/* Parti backend ajouter faire attention durant les tests de push */
