@@ -9,8 +9,8 @@ function App() {
     <div className="app-container">
       <h1 className="main-title">Bienvenue sur DocuFlow 🚀</h1>
       <p className="main-description">
-        Générez votre contrat PDF personnalisé – projet imaginé pour la{" "}
-        <strong>Mutuelle des Motards</strong>.
+        Générez votre contrat PDF personnalisé en quelques clics !
+        <br />
       </p>
       <div className="darkmode-toggle-wrapper">
         <DarkModeToggle />
